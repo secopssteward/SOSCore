@@ -41,8 +41,8 @@ namespace SecOpsSteward.Shared.Roles
             _logger.LogTrace($"Resolving username {username}");
             return Task.FromResult(new TokenOwner
             {
-                Name = $"User {username}",
-                Email = $"{username}@id",
+                Name = $"{username}@contoso.com",
+                Email = $"{username}@contoso.com",
                 UserId = new ChimeraUserIdentifier(GetGuidFromUsername(username)),
                 Aliases = new List<string> {$"{username}"}
             });
