@@ -49,7 +49,7 @@ namespace SecOpsSteward.Integrations.Azure
         {
             // todo: can we simplify this to generating a URL?
             var keyName = GetKeyNameFromIdentifier(identifier);
-            if (identifier is ChimeraUserIdentifier)
+            if (identifier.Type == ChimeraEntityIdentifier.EntityType.User)
                 return GetUserKeyClient().GetKey(keyName).Value.Id.ToString();
             else
                 return GetAgentKeyClient().GetKey(keyName).Value.Id.ToString();

@@ -567,8 +567,17 @@ namespace SecOpsSteward.Shared.DiscoveryWorkflow
         private object[] InjectParameters(object[] parameters)
         {
             var parametersList = new List<object>(parameters);
-            parametersList.Insert(0, CurrentStep.StepId.ShortId());
-            parametersList.Insert(1, WorkflowMessage.WorkflowId.ShortId());
+            if (WorkflowMessage != null)
+            {
+                parametersList.Insert(0, CurrentStep.StepId.ShortId());
+                parametersList.Insert(1, WorkflowMessage.WorkflowId.ShortId());
+            }
+            else
+            {
+                parametersList.Insert(0, "No Step");
+                parametersList.Insert(1, "No Workflow");
+            }
+            
             parametersList.Insert(2, _phase);
             return parametersList.ToArray();
         }
