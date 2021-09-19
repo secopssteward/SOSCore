@@ -102,6 +102,11 @@ namespace SecOpsSteward.Shared.Roles
         /// </summary>
         public List<string> Aliases { get; set; } = new();
 
+        /// <summary>
+        ///     User Role
+        /// </summary>
+        public ChimeraUserRole Role { get; set; } = ChimeraUserRole.None;
+
         public static TokenOwner Create(AuthenticationState state, bool hasAuthConfiguration)
         {
             if (!hasAuthConfiguration) return Default();
