@@ -201,6 +201,7 @@ namespace SecOpsSteward.Shared
         /// <summary>
         ///     Get short representation of Entity ID
         /// </summary>
+        [JsonIgnore]
         public string ShortId => Id.ToString().Substring(0, 8);
 
         /// <summary>

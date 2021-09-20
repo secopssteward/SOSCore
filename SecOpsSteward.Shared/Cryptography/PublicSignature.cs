@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text.Json.Serialization;
 
 namespace SecOpsSteward.Shared.Cryptography
 {
@@ -25,6 +26,7 @@ namespace SecOpsSteward.Shared.Cryptography
         /// <summary>
         ///     If this object represents a completed signature (not necessarily valid)
         /// </summary>
+        [JsonIgnore]
         public bool IsSigned => SignatureBytes != null && SignatureBytes.Length > 0;
 
         /// <summary>
