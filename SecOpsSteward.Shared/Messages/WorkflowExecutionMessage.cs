@@ -16,10 +16,12 @@ namespace SecOpsSteward.Shared.Messages
         }
 
         public WorkflowExecutionMessage(
+            Guid workflowId,
             ChimeraUserIdentifier userId,
             ExecutionStepCollection steps)
         {
-            WorkflowId = Guid.NewGuid();
+            ExecutionId = Guid.NewGuid();
+            WorkflowId = workflowId;
             UserId = userId;
             Steps = steps;
         }
@@ -34,6 +36,7 @@ namespace SecOpsSteward.Shared.Messages
             WorkflowExecutionMessage previousWorkflow,
             WorkflowReceipt previousReceipt)
         {
+            ExecutionId = Guid.NewGuid();
             WorkflowId = previousWorkflow.WorkflowId;
             UserId = previousWorkflow.UserId;
             Steps.AddRange(previousWorkflow.Steps);
@@ -45,6 +48,11 @@ namespace SecOpsSteward.Shared.Messages
             });
             LastRunReceipt = previousReceipt;
         }
+
+        /// <summary>
+        ///     Workflow Execution ID
+        /// </summary>
+        public Guid ExecutionId { get; set; }
 
         /// <summary>
         ///     Workflow ID

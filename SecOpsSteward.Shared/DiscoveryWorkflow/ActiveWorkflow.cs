@@ -145,6 +145,7 @@ namespace SecOpsSteward.Shared.DiscoveryWorkflow
 
             WorkflowReceipt = new WorkflowReceipt
             {
+                ExecutionId = WorkflowMessage.ExecutionId,
                 WorkflowRunCount = 1,
                 Receipts = WorkflowMessage.Receipts,
                 WorkflowComplete = false,

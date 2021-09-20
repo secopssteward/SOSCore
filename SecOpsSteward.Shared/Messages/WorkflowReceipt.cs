@@ -10,6 +10,11 @@ namespace SecOpsSteward.Shared.Messages
     public class WorkflowReceipt : ISignableByOne, IEncryptable
     {
         /// <summary>
+        ///     Workflow Execution ID
+        /// </summary>
+        public Guid ExecutionId { get; set; }
+
+        /// <summary>
         ///     Workflow ID
         /// </summary>
         public Guid WorkflowId { get; set; }
@@ -54,6 +59,7 @@ namespace SecOpsSteward.Shared.Messages
         {
             var receipt = new WorkflowReceipt
             {
+                ExecutionId = ExecutionId,
                 WorkflowId = WorkflowId,
                 WorkflowComplete = WorkflowComplete,
                 WorkflowRunCount = WorkflowRunCount,
