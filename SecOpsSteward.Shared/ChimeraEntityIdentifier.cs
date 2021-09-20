@@ -273,5 +273,14 @@ namespace SecOpsSteward.Shared
         {
             return guid.ToString().Substring(0, 8);
         }
+
+        /// <summary>
+        ///     Get short representation of Guid
+        /// </summary>
+        public static string ShortIdEnd(this Guid guid)
+        {
+            var guidStr = guid.ToString();
+            return guidStr.Substring(guidStr.Length - 12, 12);
+        }
     }
 }
