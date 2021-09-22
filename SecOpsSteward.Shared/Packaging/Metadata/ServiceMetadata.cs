@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using SecOpsSteward.Plugins;
 using SecOpsSteward.Plugins.Configurable;
 using SecOpsSteward.Plugins.WorkflowTemplates;
@@ -20,7 +21,9 @@ namespace SecOpsSteward.Shared.Packaging.Metadata
             Description = service.GetDescriptiveDescription();
             ParameterCollection = service.GetConfigurationDescription();
             var pluginTypes = service.GetType().Assembly.GetTypes()
-                .Where(t => t.GetInterfaces().Contains(typeof(IPlugin)));
+                .Where(t => t.GetInterfaces().Contains(typeof(IPlugin)))
+                .Where(t => t.GetCustomAttribute<ManagedServiceAttribute>() != null)
+                .Where(t => t.GetCustomAttribute<ManagedServiceAttribute>().ManagedServiceId == ServiceId.Id);
             PluginIds = new List<ChimeraPackageIdentifier>(pluginTypes.Select(p =>
                 new ChimeraPackageIdentifier(p.GenerateId())));
             Templates = service.Templates;

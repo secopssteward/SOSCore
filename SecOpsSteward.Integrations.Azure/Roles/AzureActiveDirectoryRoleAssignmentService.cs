@@ -96,12 +96,10 @@ namespace SecOpsSteward.Integrations.Azure.Roles
         {
             var azure = _platformFactory.GetCredential().GetAzure();
 
-            await Task.WhenAll(requirements.Select(async requirement =>
+            await Task.WhenAll(requirements.Cast<AzurePluginRbacRequirements>().Select(async requirement =>
             {
-                var azReqs = requirements as AzurePluginRbacRequirements;
-
                 var role = (await azure.AccessManagement.RoleAssignments
-                        .ListByScopeAsync(azReqs.Scope))
+                        .ListByScopeAsync(requirement.Scope))
                     .First(r => r.PrincipalId == identity && r.RoleDefinitionId == PluginRoleDefinitionId(plugin));
 
                 await azure.AccessManagement.RoleAssignments
