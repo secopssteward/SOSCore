@@ -20,6 +20,10 @@ namespace SecOpsSteward.Shared.Packaging.Metadata
             Name = service.GetDescriptiveName();
             Description = service.GetDescriptiveDescription();
             ParameterCollection = service.GetConfigurationDescription();
+
+            if (service.GetType().GetCustomAttribute<ServiceImageAttribute>() != null)
+                Image = service.GetType().GetCustomAttribute<ServiceImageAttribute>().SVG;
+
             var pluginTypes = service.GetType().Assembly.GetTypes()
                 .Where(t => t.GetInterfaces().Contains(typeof(IPlugin)))
                 .Where(t => t.GetCustomAttribute<ManagedServiceAttribute>() != null)
@@ -42,6 +46,11 @@ namespace SecOpsSteward.Shared.Packaging.Metadata
         ///     Service display name
         /// </summary>
         public string Name { get; set; }
+
+        /// <summary>
+        ///     Service display image
+        /// </summary>
+        public string Image { get; set; }
 
         /// <summary>
         ///     Description of what the Service does
